@@ -91,10 +91,13 @@ def evaluate_gp(individual, mode=1, n_iter=10, problem_instances=training_functi
             )
 
             if mode == 1:
+                # Fitness as difference of objective function values between best and global minimum
                 fitness_value = np.abs(problem["fit"](*best) - problem["fit"](*problem["global_min"]))
             elif mode == 2:
+                # Fitness as distance of best position from global minimum
                 fitness_value = np.sum(np.abs(best - problem["global_min"]))
             elif mode == 3:
+                # Fitness as sum of distances of all particles from global minimum
                 final_positions = hist[-1]
                 fitness_value = np.sum(np.sum(np.abs(p - problem["global_min"])) for p in final_positions)
 
